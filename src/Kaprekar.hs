@@ -7,6 +7,7 @@ import Data.List (nub, sort)
 kaprekar :: Int -> Either String Int
 kaprekar 6174 = Right 0
 kaprekar n
+  | n < 0 = Left "n must be nonnegative"
   | length (nub digits) < 2 = Left "n must be composed of at least two distinct digits"
   | length digits > 4 = Left "n must be four digits in length or less"
   | otherwise = (+1) <$> kaprekar diff
