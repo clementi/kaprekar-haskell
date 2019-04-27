@@ -16,5 +16,5 @@ main = hspec $ do
       kaprekar 0 `shouldBe` (Left "n must be composed of at least two distinct digits")
       kaprekar 9999 `shouldBe` (Left "n must be composed of at least two distinct digits")
 
-    it "returns the number of cycles determined by Kaprekar's routine on a four-digit nonnegative integer" $ do
+    it "returns a Right value with the number of cycles determined by Kaprekar's routine on a four-digit nonnegative integer" $ do
       kaprekar 1701 `shouldBe` (Right 4)
