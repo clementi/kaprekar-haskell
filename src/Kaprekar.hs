@@ -12,7 +12,7 @@ kaprekar n
   | length digits > 4 = Left "n must be four digits in length or less"
   | otherwise = (+1) <$> kaprekar diff
   where digits = digits4 n
-        diff = high (digits) - low (digits)
+        diff = high digits - low digits
 
 digits4 :: Int -> [Int]
 digits4 n = take (4 - length ds) (repeat 0) ++ ds
