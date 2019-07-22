@@ -22,9 +22,7 @@ digits4 n = take (4 - length ds) (repeat 0) ++ ds
           | otherwise = m `mod` 10 : digits (m `div` 10)
 
 digits2int :: [Int] -> Int
-digits2int [] = 0
-digits2int [d] = d
-digits2int (d:ds) = d * 10^(length ds) + digits2int ds
+digits2int = foldl (\x y -> x * 10 + y) 0
 
 high :: [Int] -> Int
 high = digits2int . reverse . sort
