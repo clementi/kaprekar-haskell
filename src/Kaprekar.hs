@@ -2,7 +2,8 @@ module Kaprekar
   ( kaprekar
   ) where
 
-import Data.List (nub, sort)
+import Data.List (nub, sort, sortOn)
+import Data.Ord
 
 kaprekar :: Int -> Either String Int
 kaprekar 6174 = Right 0
@@ -15,7 +16,7 @@ kaprekar n
         diff = high digits - low digits
 
 digits4 :: Int -> [Int]
-digits4 n = take (4 - length ds) (repeat 0) ++ ds
+digits4 n = replicate (4 - length ds) 0 ++ ds
   where ds = digits n
         digits m
           | m >= 0 && m < 10 = [m]
@@ -25,7 +26,7 @@ digits2int :: [Int] -> Int
 digits2int = foldl (\x y -> x * 10 + y) 0
 
 high :: [Int] -> Int
-high = digits2int . reverse . sort
+high = digits2int . (sortOn Down)
 
 low :: [Int] -> Int
 low = digits2int . sort
