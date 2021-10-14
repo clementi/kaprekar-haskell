@@ -7,11 +7,13 @@ import Kaprekar (kaprekar)
 
 main :: IO ()
 main = do
-  args <- getArgs
-  if null args
-    then putStrLn "number required"
-    else
-      let n = read (head args)
-      in case kaprekar n of
-        Right result -> print result
-        Left msg -> putStrLn msg
+  firstArg <- headMaybe <$> getArgs
+  case firstArg of
+    Nothing -> putStrLn "number required"
+    Just arg -> case kaprekar (read arg) of
+      Right result -> print result
+      Left msg -> putStrLn msg
+
+headMaybe :: [a] -> Maybe a
+headMaybe [] = Nothing
+headMaybe (x:_) = Just x
